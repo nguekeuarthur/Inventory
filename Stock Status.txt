@@ -1,0 +1,40 @@
+Stock Status = 
+VAR InventoryLevel = COALESCE( MAX ( 'Inventory'[Inventory Level] ), 0 )
+VAR DOH = [Days of Inventory on Hand (DOH)]
+
+// --- Colors ---
+VAR GreenColor = "#E0F8CA"   // In Stock
+VAR RedColor   = "#F8CACC"   // Out of Stock
+VAR AmberColor = "#F6EDC9"   // Low Stock
+VAR TextColor  = "#000000"   // Black text for readability
+
+// --- Status Logic ---
+VAR StatusText =
+   SWITCH (
+    TRUE(),
+    InventoryLevel = 0, "Out of Stock",
+    InventoryLevel > 0 && DOH = 0, "In Stock",   // Stock but no sales
+    InventoryLevel > 0 && DOH < 7, "Low Stock",
+    InventoryLevel > 0 && DOH >= 7, "In Stock",
+    "In Stock"
+)
+
+VAR FillColor =
+    SWITCH (
+        TRUE(),
+        InventoryLevel = 0, RedColor,
+        InventoryLevel > 0 && DOH = 0, GreenColor,
+        InventoryLevel > 0 && DOH < 7, AmberColor,
+        InventoryLevel > 0 && DOH >= 7, GreenColor,
+        GreenColor
+    )
+
+// --- Pill Shape SVG ---
+RETURN
+"data:image/svg+xml;utf8,
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60' width='100%' height='30'>
+    <rect x='0' y='5' width='200' height='50' rx='25' ry='25' fill='" & FillColor & "' />
+    <text x='100' y='38' font-size='25' text-anchor='middle' fill='" & TextColor & "' font-family='Segoe UI, sans-serif'>
+        " & StatusText & "
+    </text>
+</svg>"
