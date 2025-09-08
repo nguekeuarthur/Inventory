@@ -1,5 +1,5 @@
 # Tableau de Bord d'Inventaire - Projet Power BI
-![image alt]([image_url](https://github.com/nguekeuarthur/Inventory/blob/3a6ab9f8f3b30b736930efea834f38400102d78c/inventoryProject.gif))
+![image alt](https://github.com/nguekeuarthur/Inventory/blob/3a6ab9f8f3b30b736930efea834f38400102d78c/inventoryProject.gif)
 ## Description
 Ce projet présente un tableau de bord d'analyse d'inventaire pour une chaîne de magasins de détail, développé avec Power BI. Il permet de visualiser et d'analyser les données d'inventaire, les ventes et les prévisions de demande à travers différents magasins et catégories de produits.
 
